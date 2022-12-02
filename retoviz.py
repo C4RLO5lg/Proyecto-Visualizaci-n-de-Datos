@@ -42,14 +42,19 @@ df_acep_tot = df_acep_tot.loc['total':]
 df_acep_tot.drop(columns = ['1ra_op','no_1ra_op'], inplace= True)
 df_acep_tot = df_acep_tot.transpose()
 
-fig2 = px.pie(df_acep_tot, values = 'total', names = df_acep_tot.index, title="Indice anual total de alumnos aceptados en su primera opción de intercambo")
+fig2 = px.pie(df_acep_tot, values = 'total', names = df_acep_tot.index, title="Indice anual total de alumnos aceptados en su primera opción de intercambo",
+width=1000, height=500
+)
 st.write(fig2)
 
 # Figura 3
 df_acep_tot2 = df.loc[:,['Escuela','Posición','Continente','Promedio']]
 df_acep_tot2.rename({'Prom_ran':'Promedio'}, inplace = True)
 
-fig3 = px.parallel_categories(df_acep_tot2,dimensions=['Escuela','Posición','Continente'], title = 'Total histórico de alumnos aceptados y rechazados en su primera opción por promedio y continente de intercambio', color_continuous_scale=px.colors.sequential.Sunset, color = 'Promedio')
+fig3 = px.parallel_categories(df_acep_tot2,dimensions=['Escuela','Posición','Continente'], title = 'Total histórico de alumnos aceptados y rechazados en su primera opción por promedio y continente de intercambio', color_continuous_scale=px.colors.sequential.Sunset, color = 'Promedio'
+,width=1000, height=500
+)
+st.plotly_chart(fig3, use_container_width=True)
 fig3.update_layout(coloraxis_colorbar_x=+1.1)
 st.write(fig3)
 
@@ -68,6 +73,16 @@ prog_año.loc['total'] = prog_año.select_dtypes(pd.np.number).sum()
 
 prog_año['Intercambios'] = round(prog_año['INT']/(prog_año['INT'] + prog_año['SA']),2)
 prog_año['Study Abroad'] = [1-i for i in prog_año['Intercambios']]
+
+fig4 = px.bar(prog_año, x= prog_año.index, y=['Study Abroad',"Intercambios"], title="Proporción de intercambios vs proporción de programas 'Study Abroad' por año escolar")
+st.write(fig4)
+
+# Figura 5
+
+fig5 = px.parallel_categories(df,dimensions=['Escuela','Tipo de programa','Continente'],title="Total histórico de programas de intercambio y Study Abroad por escuela y continente", color_continuous_scale=px.colors.sequential.Peach, color = 'Promedio')
+fig5.update_layout(coloraxis_colorbar_x=+1.1)
+st.write(fig5)
+#Sitio de programas int: Debe de tener un titulo, descripcion y graficas
 
 fig4 = px.bar(prog_año, x= prog_año.index, y=['Study Abroad',"Intercambios"], title="Proporción de intercambios vs proporción de programas 'Study Abroad' por año escolar")
 st.write(fig4)
