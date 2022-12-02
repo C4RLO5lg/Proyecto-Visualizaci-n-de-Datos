@@ -28,7 +28,7 @@ df_acep['Porcentaje_no'] = [1-i for i in df_acep['Porcentaje_si']]
 df_acep = df_acep.iloc[:8]
 
 fig1 = px.bar(df_acep, x= df_acep.index, y=["Porcentaje_si", 'Porcentaje_no'], title="Indice anual de alumnos aceptados en su primera opción de intercambo"
-,width=900, height=500)
+,width=1100, height=500)
 st.write(fig1)
 
 # Figura 2
@@ -53,9 +53,8 @@ df_acep_tot2.rename({'Prom_ran':'Promedio'}, inplace = True)
 fig3 = px.parallel_categories(df_acep_tot2,dimensions=['Escuela','Posición','Continente'], title = 'Histórico de alumnos aceptados y rechazados en su primera opción por promedio y continente de intercambio', color_continuous_scale=px.colors.sequential.Sunset, color = 'Promedio'
 ,width=900, height=500
 )
-st.plotly_chart(fig3, use_container_width=True)
 fig3.update_layout(coloraxis_colorbar_x=+1.1)
-#st.write(fig3)
+st.write(fig3)
 
 st.header('2. ¿Cada periodo el 80"%" de los alumnos se internacionalizan vía intercambio y solo el 20"%" se internacionaliza con un study abroad, certificación, verano o invierno?')
 
