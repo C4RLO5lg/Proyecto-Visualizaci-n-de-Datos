@@ -27,7 +27,8 @@ df_acep['Porcentaje_si'] = round(df_acep['1ra_op']/(df_acep['1ra_op'] + df_acep[
 df_acep['Porcentaje_no'] = [1-i for i in df_acep['Porcentaje_si']]
 df_acep = df_acep.iloc[:8]
 
-fig1 = px.bar(df_acep, x= df_acep.index, y=["Porcentaje_si", 'Porcentaje_no'], title="Indice anual de alumnos aceptados en su primera opción de intercambo")
+fig1 = px.bar(df_acep, x= df_acep.index, y=["Porcentaje_si", 'Porcentaje_no'], title="Indice anual de alumnos aceptados en su primera opción de intercambo"
+,width=1000, height=500)
 st.write(fig1)
 
 # Figura 2
@@ -42,9 +43,7 @@ df_acep_tot = df_acep_tot.loc['total':]
 df_acep_tot.drop(columns = ['1ra_op','no_1ra_op'], inplace= True)
 df_acep_tot = df_acep_tot.transpose()
 
-fig2 = px.pie(df_acep_tot, values = 'total', names = df_acep_tot.index, title="Indice anual total de alumnos aceptados en su primera opción de intercambo",
-width=1000, height=500
-)
+fig2 = px.pie(df_acep_tot, values = 'total', names = df_acep_tot.index, title="Indice anual total de alumnos aceptados en su primera opción de intercambo")
 st.write(fig2)
 
 # Figura 3
@@ -73,16 +72,6 @@ prog_año.loc['total'] = prog_año.select_dtypes(pd.np.number).sum()
 
 prog_año['Intercambios'] = round(prog_año['INT']/(prog_año['INT'] + prog_año['SA']),2)
 prog_año['Study Abroad'] = [1-i for i in prog_año['Intercambios']]
-
-fig4 = px.bar(prog_año, x= prog_año.index, y=['Study Abroad',"Intercambios"], title="Proporción de intercambios vs proporción de programas 'Study Abroad' por año escolar")
-st.write(fig4)
-
-# Figura 5
-
-fig5 = px.parallel_categories(df,dimensions=['Escuela','Tipo de programa','Continente'],title="Total histórico de programas de intercambio y Study Abroad por escuela y continente", color_continuous_scale=px.colors.sequential.Peach, color = 'Promedio')
-fig5.update_layout(coloraxis_colorbar_x=+1.1)
-st.write(fig5)
-#Sitio de programas int: Debe de tener un titulo, descripcion y graficas
 
 fig4 = px.bar(prog_año, x= prog_año.index, y=['Study Abroad',"Intercambios"], title="Proporción de intercambios vs proporción de programas 'Study Abroad' por año escolar")
 st.write(fig4)
