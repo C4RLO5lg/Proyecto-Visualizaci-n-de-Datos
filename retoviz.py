@@ -51,7 +51,7 @@ df_acep_tot2 = df.loc[:,['Escuela','Posición','Continente','Promedio']]
 df_acep_tot2.rename({'Prom_ran':'Promedio'}, inplace = True)
 
 fig3 = px.parallel_categories(df_acep_tot2,dimensions=['Escuela','Posición','Continente'], title = 'Histórico de alumnos aceptados y rechazados en su primera opción por promedio y continente de intercambio', color_continuous_scale=px.colors.sequential.Sunset, color = 'Promedio'
-,width=800, height=500
+,width=900, height=500
 )
 st.plotly_chart(fig3, use_container_width=True)
 fig3.update_layout(coloraxis_colorbar_x=+1.1)
