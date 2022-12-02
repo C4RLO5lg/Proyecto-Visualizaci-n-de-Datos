@@ -28,7 +28,7 @@ df_acep['Porcentaje_no'] = [1-i for i in df_acep['Porcentaje_si']]
 df_acep = df_acep.iloc[:8]
 
 fig1 = px.bar(df_acep, x= df_acep.index, y=["Porcentaje_si", 'Porcentaje_no'], title="Indice anual de alumnos aceptados en su primera opción de intercambo"
-,width=1100, height=500)
+,width=950, height=500)
 st.write(fig1)
 
 # Figura 2
